@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    env_file: docker/mysql.env
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_confd:/etc/mysql/conf.d
+      - ./docker/mysql_initdb:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3406
+    networks:
+      - default
+
+  redis:
+    image: redis:6.0-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - 6379:6479
+    networks:
+      - default
+
+  web:
+    image: tutorial/flask:0.1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/srv/flask
+      - python_packages:/usr/local/lib/python3.6/site-packages/
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - 5000:5000
+    networks:
+      - default
+
+volumes:
+  mysql_data:
+  mysql_confd:
+  redis_data:
+  python_packages:
+
+networks:
+  default:
