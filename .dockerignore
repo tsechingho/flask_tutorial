@@ -1,6 +1,28 @@
+# Ignore files of Docker
 .dockerignore
-Dockerfile
+Dockerfile*
 docker-compose*
 docker/*
+!docker/docker-entrypoint.sh
 
+# Ignore files of Mac OS
+.DS_Store
+
+# Ignore files of git
+.git
+.gitignore
+.gitattributes
+
+# Ignore files of Python
+*.pyc
+*.pyo
+
+# Ignore files of pipenv
+.env*
+.venv
+
+# Ignore files of flask
+.flaskenv
+
+# Ignore files of Application
 README.md

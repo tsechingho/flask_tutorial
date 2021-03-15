@@ -1,0 +1,12 @@
+# Ignore files of Mac OS
+.DS_Store
+
+# Ignore files of Python
+*.pyc
+*.pyo
+
+# Ignore files of pipenv
+.env*
+
+# Ignore files of flask
+.flaskenv

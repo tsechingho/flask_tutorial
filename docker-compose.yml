@@ -28,6 +28,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: flask_develop
+      args:
+        flask_env: development
     stdin_open: true
     tty: true
     volumes:
